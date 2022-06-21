@@ -13,7 +13,7 @@ require('dotenv').config()
 const con = mysql.createConnection({
   host: "bbeaj1mkry1wekdffyhz-mysql.services.clever-cloud.com",
   user: "uj4foh17ffbafcg4",
-  password: "uj4foh17ffbafcg4",
+  password: "Zx1ArHNrBg3iwnEDWZ3s",
   database: "bbeaj1mkry1wekdffyhz",
 
 

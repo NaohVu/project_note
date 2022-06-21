@@ -1,0 +1,118 @@
+<div class="container">
+    <div class="py-5 px-4 d-flex justify-content-between">
+        <div class="input-group-lg d-flex align-items-center input-group">
+            <input type="text" class="form-control input-search" placeholder="Tìm kiếm" aria-label="Tìm kiếm">
+            <span>
+                <button class="btn-search btn d-flex">
+                    <i class="fa-solid fa-magnifying-glass icon-search"></i>
+                </button>
+            </span>
+        </div>
+
+        <div class="d-flex justify-content-between wrap-btn-add">
+            <button class="btn btn-add-note fs-5" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                Thêm mục ghi chú</button>
+            <button class="btn btn-add-note fs-5">
+                <a href="/notesname/notes/1" class="link-dark d-flex justify-content-around align-items-center"
+                    style="height: 100%;width:100%">
+                    Đến ghi chú
+                </a>
+            </button>
+        </div>
+
+        <div class="input-group-lg input-group">
+            <select class="form-select" id="inputGroupSelect01">
+                <option selected>Sắp xếp</option>
+                <option value="1">A => Z</option>
+                <option value="2">Z => A</option>
+                <option value="3">Ngày tạo</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row">
+        <form METHOD="POST" action="/notesname?_method=DELETE" class="row">
+            <div class="ms-4">
+                <button type="reset" class="d-none btn btn-primary btn-cancel" style="height: 50px; width: 200px;">
+                    <a href="/notesname" class="link-dark d-flex align-items-center justify-content-center"
+                        style="height: 100%; width: 100%" ;>
+                        Huỷ
+                    </a>
+                </button>
+                <button type="submit" class="d-none btn btn-danger btn-delete"
+                    style="height: 50px; width: 200px">Xoá</button>
+            </div>
+
+            {{#each results}}
+
+            <div class="col-xl-4 d-flex justify-content-center">
+                <div class="border border-info my-5 wrap-names" style="width: 18.75rem; height: 9.375rem;">
+                    <a href="notesname/notes/{{id}}" class="link-dark">
+                        <label
+                            class="fs-1 text-capitalize label-note-name d-flex justify-content-center align-items-center text-center note-box"
+                            style="width: 100%; height: 100%;">
+                            {{this.name}}
+                        </label>
+                        <input type="checkbox" class="d-none input-note-name" name="name" id="{{this.name}}"
+                            value="{{this.name}}">
+                    </a>
+                </div>
+            </div>
+
+            {{/each}}
+
+        </form>
+    </div>
+
+    <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <form METHOD="POST" class="modal-dialog" action="/notesname">
+            <div class="modal-content">
+                <div class="modal-header d-flex justify-content-between">
+                    <h5 class="modal-title" id="exampleModalLabel">Thêm tên ghi chú</h5>
+                    <h5 class="modal-title modal-delete-note" id="exampleModalLabel" data-bs-dismiss="modal"
+                        aria-label="Close" onclick="deleteName()">Xoá tên ghi chú</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group d-flex justify-content-between align-items-center">
+                        <label for="name">
+                            Tên
+                        </label>
+                        <input type="text" id="name" name="name" class="input-group-text input-add-note" required>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button type="submit" class="btn btn-primary">Thêm</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+<script>
+    function deleteName() {
+        const inputNoteName = document.querySelectorAll(".input-note-name")
+        const labelNoteName = document.querySelectorAll(".label-note-name")
+        const btnDelete = document.querySelector(".btn-delete")
+        const btnCancel = document.querySelector(".btn-cancel")
+
+
+        btnDelete.classList.remove("d-none")
+        btnCancel.classList.remove("d-none")
+
+
+        inputNoteName.forEach(function (name) {
+            name.classList.remove("d-none")
+        })
+
+        for (var i = 0; i < inputNoteName.length; i++) {
+            var x = inputNoteName[i].id
+            labelNoteName[i].setAttribute("for", x)
+
+        }
+    }
+    const wrapNames = document.querySelectorAll(".wrap-names")
+
+</script>

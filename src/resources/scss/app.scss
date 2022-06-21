@@ -1,0 +1,189 @@
+@import 'variables';
+
+
+.logo {
+    width: 100px;
+    height: 50px;
+}
+
+.img {
+    &-user {
+        width: 35px;
+        height: 35px;
+        cursor: pointer;
+        position: relative;
+    }
+    &-background {
+        width: 100%;
+        opacity: 0.8;
+        clip-path: ellipse(67% 80% at 51% 10%);
+    }
+
+}
+
+@import "../../../node_modules/bootstrap/scss/functions";
+@import "../../../node_modules/bootstrap/scss/variables";
+@import "../../../node_modules/bootstrap/scss/root";
+
+
+.input {
+    &-group {
+        border-radius: 0.313rem;
+        max-width: 17rem;
+        height: 3.125rem;
+        background-color: $gray-300;
+    }
+
+    &-search {
+        background-color: transparent;
+        border-color: transparent;
+        border: none;
+        box-shadow: none;
+    }
+
+    &-add-note {
+        width: 200px;
+    }
+}
+
+.form {
+    &-control {
+        &:focus {
+            border: none;
+            background-color: transparent;
+            box-shadow: none;
+        }
+    }
+
+    &-select {
+        background-color: $gray-300;
+
+        &:focus {
+            border: none;
+            background-color: transparent;
+            box-shadow: none;
+        }
+    }
+}
+
+.btn {
+    &-search {
+        &:hover {
+            color: $pink-600;
+        }
+    }
+
+    &:focus {
+        box-shadow: none;
+    }
+
+    &-add-note {
+        width: 200px;
+        background-color: $gray-400;
+
+        &:hover {
+            background-color: $gray-500;
+        }
+    }
+}
+
+.icon-search {
+    font-size: 1.7rem;
+
+}
+
+.link {
+    &-dark {
+        text-decoration: none;
+    }
+
+    &-content {
+        width: 20rem;
+        height: $height-link-content;
+
+        :hover {
+            background: $gray-400;
+
+        }
+    }
+
+}
+
+.nav {
+    &-name {
+        height: 600px;
+        overflow-y: scroll;
+        position: sticky;
+        top: 0;
+    }
+    &-background {
+        background-color: $blue-600;
+    }
+
+}
+
+.wrap {
+    &-notes {
+        display: grid;
+        grid-template-areas: "name link";
+    }
+
+    &-btn-add {
+        width: 440px;
+    }
+
+    &-names {
+        &:hover {
+            background-color: $gray-400;
+        }
+    }
+}
+
+
+
+.modal {
+    &-title {
+        &:hover {
+            color: $red-500;
+            cursor: pointer;
+        }
+    }
+}
+
+.info {
+    &-user {
+        border-radius: 10px;
+        width: 200px;
+        margin-top: 8px;
+        transform: translateX(-81%);
+        cursor: pointer;
+        border: 0.5px solid $gray-300;
+        box-shadow: $box-shadow;
+        background-color: $gray-100;
+        position: absolute;
+        z-index: 100;
+
+        &_wrap {
+            list-style: none;
+        }
+        
+    }
+}
+
+.hover {
+    &:hover {
+        color: $red-500;
+    }
+}
+
+.header {
+    &-background {
+        background: $gray-700;
+    }
+}
+
+.note {
+    &-box {
+        background-color: $indigo-200;
+    }
+}

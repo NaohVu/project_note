@@ -1,0 +1,165 @@
+<div class="container">
+    <div class="my-5 d-flex justify-content-between" style="margin-right: 39px">
+        <div class="input-group-lg d-flex align-items-center input-group">
+            <input type="text" class="form-control input-search" placeholder="Tìm kiếm" aria-label="Tìm kiếm">
+            <span>
+                <button class="btn-search btn d-flex">
+                    <i class="fa-solid fa-magnifying-glass icon-search"></i>
+                </button>
+            </span>
+        </div>
+
+
+        <div class="d-flex justify-content-between wrap-btn-add">
+            <button class="btn btn-add-note fs-5">
+                <a href="/notesname" class="link-dark d-flex justify-content-around align-items-center"
+                    style="height: 100%;width:100%">
+                    Đến mục ghi chú
+                </a>
+            </button>
+            <button class="btn btn-add-note fs-5" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Thêm ghi chú</button>
+        </div>
+
+
+        <div class="input-group-lg input-group">
+            <select class="form-select" id="inputGroupSelect01">
+                <option selected>Sắp xếp</option>
+                <option value="1">A => Z</option>
+                <option value="2">Z => A</option>
+                <option value="3">Ngày tạo</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row wrap-notes">
+        <div id=" list-example" class="nav-name my-2" style="grid-area: name;">
+            {{#each results}}
+            {{#each this.name}}
+
+            <a href="/notesname/notes/{{this.id}}" class="link-dark">
+                <div class="border border-info mb-4 d-flex justify-content-center align-items-center text-center"
+                    style="width: 18.75rem; height: 9.375rem;">
+                    <h1 class="text-capitalize">
+                        {{name}}
+
+                    </h1>
+                </div>
+            </a>
+
+            {{/each}}
+            {{/each}}
+
+        </div>
+
+        <form METHOD="POST" action="/notesname/notes?_method=DELETE">
+            <div class=" d-flex justify-content-around align-content-start flex-wrap my-2"
+                style="grid-area: link; width: 780px">
+
+                <div class="mb-5 btn-delete d-none" style="width: 318px;">
+                    <button type="reset" class="btn btn-primary" style="height: 78px;width: 155px;">
+                        <a href="/notesname/notes/1" class="link-dark d-flex justify-content-around align-items-center"
+                            style="width: 100%; height: 100%">
+                            Huỷ
+                        </a>
+                    </button>
+                    <button type="submit" class="btn btn-danger link-content" style="width: 155px;">Xoá</button>
+                </div>
+
+                {{#each results}}
+                {{#if name}}
+                <div class="d-none"></div>
+                {{else}}
+
+                <div class="border border-primary mb-5 link-content">
+                    <a href="http://{{this.url}}" target="_blank" class="link-dark link-hover"
+                        style="width: 100%; height: 100%;">
+                        <label class="fs-1 justify-content-center d-flex align-items-center text-center note-table"
+                            style="width: 100%; height: 100%;">
+                            {{this.description}}
+                        </label>
+                        <input class="d-none note-check" type="checkbox" id="{{this.idOwn}}" value="{{this.idOwn}}"
+                            name="idOwn">
+
+
+                    </a>
+                </div>
+
+                {{/if}}
+                {{/each}}
+
+            </div>
+        </form>
+    </div>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <form METHOD="POST" class="modal-dialog" action="/notesname/notes">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Thêm ghi chú</h5>
+                    <h5 class="modal-title modal-delete-note" id="exampleModalLabel" data-bs-dismiss="modal"
+                        aria-label="Close" onclick="deleteLink()">Xoá ghi chú
+                    </h5>
+                </div>
+                <div class="modal-body">
+                    <select class="form-select" aria-label="Default select example" name="id" id="validationCustom04"
+                        required>
+                        <option selected disabled value="">Vui lòng chọn tên</option>
+                        {{#each results}}
+                        {{#each this.name}}
+                        <option value="{{this.id}}"> {{this.name}}</option>
+
+                        {{/each}}
+                        {{/each}}
+                    </select>
+                    <div class="invalid-feedback">
+                        Please select a valid state.
+                    </div>
+
+                    <div class="form-group d-flex justify-content-between align-items-center mt-3">
+                        <label for="description">
+                            Miêu tả
+                        </label>
+                        <input type="text" id="description" name="description" class="input-group-text input-add-note">
+                    </div>
+                    <div class="form-group d-flex justify-content-between align-items-center mt-3">
+                        <label for="description">
+                            Link
+                        </label>
+                        <input type="text" id="url" name="url" class="input-group-text input-add-note">
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button type="submit" class="btn btn-primary">Thêm</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<script>
+
+    function deleteLink() {
+        const btnDelete = document.querySelector(".btn-delete")
+        const idOwns = document.querySelectorAll(".note-check")
+        const noteTables = document.querySelectorAll(".note-table")
+
+        btnDelete.classList.remove("d-none")
+
+        idOwns.forEach(function (idOwn) {
+            idOwn.classList.remove("d-none")
+        })
+
+        // Click checkbox
+        for (var i = 0; i < idOwns.length; i++) {
+            var x = idOwns[i].id
+            noteTables[i].setAttribute("for", x)
+
+        }
+    }
+
+
+</script>

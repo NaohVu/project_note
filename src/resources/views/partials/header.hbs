@@ -1,0 +1,156 @@
+<nav class="navbar navbar-expand-lg navbar-dark nav-background">
+    <div class="container-fluid">
+        <a class="logo ms-2" href="/">
+            <img src="/img/logo.png" alt="logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mb-2 mb-lg-0 justify-content-end flex-grow-1 pe-3">
+                <li class="nav-item">
+                    <a class="nav-link text-white" aria-current="page" href="/">Trang chủ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#">Hướng dẫn</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="/notesname">Ghi chú của tôi</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link nav-res text-white" href="#" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Đăng
+                        kí</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-log text-white" href="#" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+                        onclick="login()">Đăng nhập</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-user-name d-none text-white">
+                    </a>
+                </li>
+                <li class="nav-item mb-lg-0 nav-user">
+                    <img src="/img/user-default-icon.png" class="rounded-circle img-user d-none"
+                        alt="user-default-icon">
+                    <div class="info-user d-none">
+                        <ul class="info-user_wrap">
+                            <li class="hover">
+                                Thông tin tài khoản
+                            </li>
+                            <li>
+                                <a href="/auth/logout" class="link-dark hover">
+                                    Đăng xuất
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+
+
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel" onclick="registration()">Đăng kí</h5>
+                    <h5 class="modal-title" id="staticBackdropLabel" onclick="login()">Đăng nhập</h5>
+                </div>
+                <div class="modal-body">
+
+                    <form class="form-registration">
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Tên đăng kí</label>
+                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Mật khẩu</label>
+                            <input type="password" class="form-control" id="exampleInputPassword1" required>
+                        </div>
+                        <div class="mb-3 has-validation">
+                            <label for="exampleInputPassword2" class="form-label">Nhập lại mật khẩu</label>
+                            <input type="password" class="form-control" id="exampleInputPassword2" required>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                            <button type="submit" class="btn btn-primary">Đăng kí</button>
+                        </div>
+                    </form>
+
+                    <form METHOD="POST" class="d-none form-login" action="/">
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label" id="validationCustomUsername">Tên đăng
+                                nhập</label>
+                            <input type="text" class="form-control" id="exampleInputEmail-res"
+                                aria-describedby="emailHelp" name="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Mật khẩu</label>
+                            <input type="password" class="form-control" id="exampleInputPassword-res" name="password"
+                                required>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                            <button type="submit" class="btn btn-primary">Đăng nhập</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<script>
+    const formLogin = document.querySelector(".form-login")
+    const formRegistration = document.querySelector(".form-registration")
+    const navLog = document.querySelector(".nav-log")
+    const navRes = document.querySelector(".nav-res")
+    const imgUser = document.querySelector(".img-user")
+    const infoUser = document.querySelector(".info-user")
+    const navUser = document.querySelector(".nav-user")
+    const userName = document.querySelector(".nav-user-name")
+
+    function login() {
+
+        formLogin.classList.remove("d-none")
+        formRegistration.classList.add("d-none")
+    }
+
+    function registration() {
+        formRegistration.classList.remove("d-none")
+        formLogin.classList.add("d-none")
+    }
+
+    // handle login
+    var user = document.cookie.split(';')
+    var nameUser = user[0].substring(9)
+
+    console.log(nameUser)
+
+    if (user != "" && user) {
+        imgUser.classList.remove("d-none")
+        userName.classList.remove("d-none")
+        navRes.classList.add("d-none")
+        navLog.classList.add("d-none")
+
+        userName.innerHTML = nameUser
+
+    }
+    else {
+        navRes.classList.remove("d-none")
+        navLog.classList.remove("d-none")
+    }
+
+    navUser.addEventListener('click', function () {
+        infoUser.classList.toggle("d-none")
+    })
+
+</script>
